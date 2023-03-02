@@ -1,22 +1,21 @@
 import { ThemeContext } from '@/providers/theme'
 import { useContext } from 'react'
 
+import { MdLightMode, MdModeNight } from 'react-icons/md'
+
 const ThemeToggle = () => {
   const { theme, updateTheme } = useContext(ThemeContext)
 
-  // if (!theme) {
-  //   return null
-  // }
-
   return (
     <>
-      <label>
+      <label className='cursor-pointer'>
         <input
           type="checkbox"
           checked={theme === 'dark'}
           onChange={e => updateTheme && updateTheme(e.target.checked ? 'dark' : 'light')}
+          className="hidden"
           />
-        toggle
+          { theme === 'dark' ? <MdModeNight size={32} /> : <MdLightMode size={32} /> }
       </label>
     </>
   )

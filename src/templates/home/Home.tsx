@@ -1,12 +1,11 @@
-import { ThemeContext } from '@/providers/theme'
 import Default from '@/layout/Default'
-import { useContext } from 'react'
+import Hero from './containers/Hero/Hero'
 
 const Home = () => {
 
   return (
     <Default>
-      <h1>HOME</h1>
+      <Hero />
     </Default>
   )
 }

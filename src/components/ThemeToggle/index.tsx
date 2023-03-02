@@ -15,7 +15,7 @@ const ThemeToggle = () => {
           onChange={e => updateTheme && updateTheme(e.target.checked ? 'dark' : 'light')}
           className="hidden"
           />
-          { theme === 'dark' ? <MdModeNight size={32} /> : <MdLightMode size={32} /> }
+          { theme === 'light' ? <MdModeNight size={32} /> : <MdLightMode size={32} /> }
       </label>
     </>
   )

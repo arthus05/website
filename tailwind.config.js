@@ -1,32 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        "background-color": "var(--background-color)",
+        "foreground-color": "var(--foreground-color)"
+      },
       animation: {
-        type: 'type 2.7s ease-out .8s infinite alternate both'
+        type: "typewriter 3.5s steps(40, end), blinkCaret .75s step-end infinite",
+        caret: "blinkCaret .75s step-end infinite",
       },
       keyframes: {
-        type: {
-          '0%': { transform: 'translateX(0ch)' },
-          '7%': { transform: 'translateX(1ch)' },
-          '14%': { transform: 'translateX(2ch)' },
-          '21%': { transform: 'translateX(3ch)' },
-          '28%': { transform: 'translateX(4ch)' },
-          '35%': { transform: 'translateX(5ch)' },
-          '42%': { transform: 'translateX(6ch)' },
-          '49%': { transform: 'translateX(7ch)' },
-          '56%': { transform: 'translateX(8ch)' },
-          '63%': { transform: 'translateX(9ch)' },
-          '70%': { transform: 'translateX(10ch)' },
-          '77%': { transform: 'translateX(11ch)' },
-          '84%': { transform: 'translateX(12ch)' },
-          '100%': { transform: 'translateX(14ch)' },
+        typewriter: {
+          "0%": { width: "0" },
+          "100%": { width: "100%" },
         },
-      }
+        blinkCaret: {
+          "0%, 100%": { borderColor: "transparent" },
+          "50%": { borderColor: "var(--foreground-color)" },
+        },
+      },
     },
   },
   plugins: [],
-}
+};

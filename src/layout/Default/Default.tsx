@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Roboto_Flex } from '@next/font/google'
+import { Roboto_Flex } from "next/font/google"
 
 import { ReactNode } from 'react'
 import Header from '@/components/Header';

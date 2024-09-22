@@ -3,7 +3,7 @@ import { Roboto_Flex } from "next/font/google";
 
 import { ReactNode } from "react";
 import Header from "@/components/Header";
-import { SideBar } from "@/components/SideBar";
+// import { SideBar } from "@/components/SideBar";
 
 interface IProps {
   children: ReactNode;

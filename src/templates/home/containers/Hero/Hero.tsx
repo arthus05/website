@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-import {  } from "react-icons/fa"
+import {} from "react-icons/fa";
 
 import styles from "./styles.module.css";
 
 const Hero = () => {
   const [nameIdx, setNameIdx] = useState(0);
-  const myName = 'Arthus Vinicius';
+  const myName = "Arthus Vinicius";
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -22,12 +22,14 @@ const Hero = () => {
       clearInterval(intervalId);
     };
   }, []);
-  //👋 
+  //👋
 
   return (
     <section
+      id="about"
       className="
-        h-[calc(100vh-4rem)]
+        h-screen
+        pt-16
         text-3xl font-extralight"
     >
       <section
@@ -51,8 +53,9 @@ const Hero = () => {
           </h1>
         </div>
         <p className="flex flex-col">
-          <span>👨🏾‍💻</span>I am a brazilian Software Engineer, passionate about coding and creating new things.
-          Currently at the eternal path of self improvement, loving every step of it.
+          <span>👨🏾‍💻</span>I am a brazilian Software Engineer, passionate about
+          coding and creating new things. Currently at the eternal path of self
+          improvement, loving every step of it.
         </p>
         <p className="text-2xl flex flex-col">
           Contact me! 📬

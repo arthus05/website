@@ -55,7 +55,7 @@ const Hero = () => {
         <p className="flex flex-col">
           <span>👨🏾‍💻</span>I am a brazilian Software Engineer, passionate about
           coding and creating new things. Currently at the eternal path of self
-          improvement, loving every step of it.
+          improvement, loving <s>and hating</s> every step of it.
         </p>
         <p className="text-2xl flex flex-col">
           Contact me! 📬

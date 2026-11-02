@@ -1,37 +1,72 @@
-.cursor::after {
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.wave {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.name {
+  display: inline-grid;
+  color: var(--accent-color);
+  font-weight: 600;
+  letter-spacing: .045em;
+}
+
+.nameSizer,
+.typedName,
+.staticName {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.nameSizer {
+  padding-right: 5px;
+  visibility: hidden;
+  user-select: none;
+}
+
+.typedName {
+  justify-self: start;
+  padding-right: 3px;
+  border-right: 2px solid currentColor;
+  animation: cursor .75s step-end infinite;
+}
+
+.staticName {
+  position: relative;
+  background: var(--background-color);
+}
+
+.name > noscript {
+  grid-area: 1 / 1;
+}
+
+.introduction {
+  max-width: 800px;
+  font-size: clamp(21px, 3vw, 28px);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.developer {
   display: block;
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 100%;
-  background-color: var(--foreground-color);
-  animation: cursor 0.6s linear infinite alternate;
-  will-change: opacity;
+  margin-bottom: 8px;
 }
 
 @keyframes cursor {
-  0%,
-  40% {
-    opacity: 1;
-  }
-
-  60%,
-  100% {
-    opacity: 0;
-  }
+  0%, 100% { border-color: transparent; }
+  50% { border-color: currentColor; }
 }
 
-.mail::after {
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  content: '';
-  width: 0;
-  height: 4px;
-  background-color: #04D9D9;
-  transition: width .5s ease-in-out;
+@media (max-width: 700px) {
+  .wave { font-size: 40px; }
 }
 
-.mail:hover::after {
-  width: 100%;
+@media (prefers-reduced-motion: reduce) {
+  .nameSizer { visibility: visible; }
+  .typedName { visibility: hidden; animation: none; border-color: transparent; }
 }

@@ -1,29 +1,16 @@
 import { ThemeContext } from "@/providers/theme";
 import { useContext } from "react";
-
-import { MdLightMode, MdModeNight } from "react-icons/md";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 const ThemeToggle = () => {
   const { theme, updateTheme } = useContext(ThemeContext);
+  const label = theme ? "Switch to " + (theme === "dark" ? "light" : "dark") + " theme" : "Switch color theme";
 
   return (
-    <>
-      <label className="cursor-pointer">
-        <input
-          type="checkbox"
-          checked={theme === "dark"}
-          onChange={(e) =>
-            updateTheme && updateTheme(e.target.checked ? "dark" : "light")
-          }
-          className="hidden"
-        />
-        {theme === "light" ? (
-          <MdModeNight size={32} />
-        ) : (
-          <MdLightMode size={32} />
-        )}
-      </label>
-    </>
+    <button className="theme-toggle" type="button" aria-label={label} title={label}
+      onClick={() => updateTheme?.(theme === "dark" ? "light" : "dark")}>
+      {theme === "dark" ? <FiSun aria-hidden="true" /> : <FiMoon aria-hidden="true" />}
+    </button>
   );
 };
 

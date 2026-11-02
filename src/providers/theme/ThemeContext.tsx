@@ -1,60 +1,31 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | undefined;
+type Theme = "light" | "dark";
 
-interface IThemeContext {
+interface ThemeContextValue {
   theme?: Theme;
-  // eslint-disable-next-line
-  updateTheme?: (value: Theme) => void;
+  updateTheme?: Dispatch<Theme>;
 }
 
-interface IProps {
-  children: ReactNode;
-}
+export const ThemeContext = createContext<ThemeContextValue>({});
 
-export const ThemeContext = createContext<IThemeContext>({
-  theme: undefined,
-  updateTheme: () => {},
-});
-
-export const ThemeProvider = ({ children }: IProps) => {
-  const [theme, setTheme] = useState<Theme>(undefined);
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>();
 
   useEffect(() => {
-    const root = window.document.documentElement;
-
-    const initialColorValue = root.style.getPropertyValue(
-      "--initial-color-theme",
-    ) as Theme;
-
-    setTheme(initialColorValue);
+    const initialTheme = document.documentElement.dataset.theme;
+    setTheme(initialTheme === "dark" ? "dark" : "light");
   }, []);
 
-  useEffect(() => {
-    console.log("theme", theme);
-  }, [theme]);
-
   const updateTheme = (value: Theme) => {
-    const root = window.document.documentElement;
-
+    document.documentElement.dataset.theme = value;
     setTheme(value);
-
-    value && localStorage.setItem("color-theme", value);
-
-    root.style.setProperty(
-      "--foreground-color",
-      value === "light" ? "#0A0A0B" : "#F9F9F9",
-    );
-
-    root.style.setProperty(
-      "--background-color",
-      value === "light" ? "#F9F9F9" : "#0A0A0B",
-    );
+    try {
+      localStorage.setItem("color-theme", value);
+    } catch {
+      // Theme switching still works when browser storage is unavailable.
+    }
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, updateTheme }}>{children}</ThemeContext.Provider>;
 };

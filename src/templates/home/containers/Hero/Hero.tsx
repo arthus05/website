@@ -1,75 +1,53 @@
 import { useEffect, useState } from "react";
-
-import {} from "react-icons/fa";
-
+import { FiArrowDown } from "react-icons/fi";
 import styles from "./styles.module.css";
+
+const myName = "Arthus Vinicius";
 
 const Hero = () => {
   const [nameIdx, setNameIdx] = useState(0);
-  const myName = "Arthus Vinicius";
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setNameIdx((prev) => {
-        if (prev === myName.length) {
-          return prev;
-        }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setNameIdx(myName.length);
+      return;
+    }
 
-        return prev + 1;
-      });
+    let index = 0;
+    const intervalId = window.setInterval(() => {
+      index += 1;
+      setNameIdx(index);
+
+      if (index === myName.length) {
+        window.clearInterval(intervalId);
+      }
     }, 150);
-    return () => {
-      clearInterval(intervalId);
-    };
+
+    return () => window.clearInterval(intervalId);
   }, []);
-  //👋
 
   return (
-    <section
-      id="about"
-      className="
-        h-screen
-        pt-16
-        text-3xl font-extralight"
-    >
-      <section
-        className="
-          h-full w-4/5 m-auto
-          flex flex-col justify-evenly
-          "
-      >
-        <div className="flex flex-col gap-6">
-          <span className="text-5xl">👋</span>
-          <h1 className="text-4xl flex flex-nowrap gap-2 w-fit">
-            Hello! I&apos;m{" "}
-            <span className="">
-              <strong className="tracking-[.075em] flex animate-caret border-r-2 overflow-hidden whitespace-nowrap text-brand-accent text-[#04D9D9]">
-                {myName.slice(0, nameIdx)}
-              </strong>
-              {/* <span */}
-              {/*   className={`${styles.cursor} absolute -bottom-0 left-0 -top-1 inline-block bg-[var(--background-color)] w-full animate-type will-change`} */}
-              {/* ></span> */}
-            </span>
-          </h1>
-        </div>
-        <p className="flex flex-col">
-          <span>👨🏾‍💻</span>I am a brazilian Software Engineer, passionate about
-          coding and creating new things. Currently at the eternal path of self
-          improvement, loving <s>and hating</s> every step of it.
-        </p>
-        <p className="text-2xl flex flex-col">
-          Contact me! 📬
-          <a
-            href="mailto:arthusvinicius.dev@gmail.com"
-            className={`
-              ${styles.mail}
-              relative
-              w-fit font-bold text-xl`}
-          >
-            arthusvinicius.dev@gmail.com
-          </a>
-        </p>
-      </section>
+    <section id="intro" className="hero" aria-labelledby="intro-title">
+      <div className={styles.greeting}>
+        <span className={styles.wave} aria-hidden="true">👋</span>
+        <h1 id="intro-title">
+          <span>Hello! I&apos;m</span>{" "}
+          <span className={styles.name}>
+            <span className={styles.nameSizer} aria-hidden="true">{myName}</span>
+            <strong className={styles.typedName} aria-hidden="true">{myName.slice(0, nameIdx)}</strong>
+            <span className="sr-only">{myName}</span>
+            <noscript><strong className={styles.staticName} aria-hidden="true">{myName}</strong></noscript>
+          </span>
+        </h1>
+      </div>
+      <p className={styles.introduction}>
+        <span className={styles.developer} aria-hidden="true">👨🏾‍💻</span>
+        I am a brazilian Software Engineer, passionate about coding and creating new things.
+        Currently at the eternal path of self improvement, loving <s>and hating</s> every step of it.
+      </p>
+      <a className="text-link primary-link hero-work-link" href="#projects">
+        Explore my work <FiArrowDown aria-hidden="true" />
+      </a>
     </section>
   );
 };
